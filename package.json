@@ -1,5 +1,5 @@
 {
-	"name": "frontend-svelte",
+	"name": "songify-frontend",
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
@@ -12,7 +12,7 @@
 		"format": "prettier --plugin-search-dir . --write ."
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-auto": "^2.0.0",
+		"@sveltejs/adapter-auto": "^3.2.0",
 		"@sveltejs/kit": "^1.20.4",
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
 		"@typescript-eslint/parser": "^5.45.0",
@@ -35,8 +35,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@auth/core": "^0.10.0",
-		"@auth/sveltekit": "^0.3.6",
-		"@fontsource/inter": "^5.0.5"
+		"@fontsource-variable/rubik": "^5.0.22"
 	}
 }

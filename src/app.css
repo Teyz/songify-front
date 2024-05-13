@@ -8,7 +8,7 @@
 	--sidebar-collapsed-width: 56px;
 	--sidebar-expanded-width: 250px;
 	--primary-linear: linear-gradient(90deg, #5a77fe 0%, #bdb0fa 100%);
-	--background-linear: linear-gradient(269deg, #1c1c1c 0%, #131313 100%);
+	--background-linear: linear-gradient(269deg, #6A5AE0 0%, #9087E5 100%);
 }
 
 hr {
@@ -16,9 +16,11 @@ hr {
 }
 
 html {
-	background-color: #1a1a1a;
-	color: #bababa;
-	font-family: 'Inter', sans-serif;
+	background: 
+	linear-gradient(0deg, rgba(193,255,0,1), rgba(0,0,0,0)),
+	url(image/grained.svg);
+	color: #0C092A;
+	font-family: 'Rubik Variable', sans-serif;
 }
 
 body {
@@ -27,6 +29,7 @@ body {
 	min-height: 100vh;
 	max-height: 100vh;
 	height: 100vh;
+	overflow: hidden;
 }
 
 /* Typography */
@@ -53,16 +56,12 @@ h3 {
 
 /* Button */
 
-.blue {
-	@apply flex justify-center items-center w-full max-w-xs py-3 px-6 bg-primary text-secondary-lightest gap-1 rounded-lg border border-solid border-white border-opacity-10;
-}
-
-.btn-blue {
-	@apply flex justify-center items-center w-full py-3 px-6 bg-primary text-secondary-lightest gap-1 rounded-lg border border-solid border-white border-opacity-10;
-}
-
 .btn {
-	@apply rounded-lg border border-solid border-white border-opacity-10 bg-secondary-light py-3 px-6 text-secondary-lightest font-medium;
+	@apply border-primary text-primary border border-opacity-20 rounded-3xl py-4 px-9 text-base font-medium;
+}
+
+.btn-blue{
+	@apply border-primary bg-primary text-primary-black border border-opacity-20 rounded-3xl py-4 px-9 text-base font-medium text-center w-full;
 }
 
 input:focus,
