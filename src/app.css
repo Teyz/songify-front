@@ -17,7 +17,7 @@ hr {
 
 html {
 	background: 
-	linear-gradient(0deg, rgba(193,255,0,1), rgba(0,0,0,0)),
+	linear-gradient(0deg, rgba(193,255,0,0) 0%, rgba(193,255,0,0.9010197829131653) 45%, rgba(193,255,0,1) 100%),
 	url(image/grained.svg);
 	color: #0C092A;
 	font-family: 'Rubik Variable', sans-serif;
@@ -26,10 +26,6 @@ html {
 body {
 	margin: 0;
 	width: 100vw;
-	min-height: 100vh;
-	max-height: 100vh;
-	height: 100vh;
-	overflow: hidden;
 }
 
 /* Typography */
@@ -62,6 +58,52 @@ h3 {
 
 .btn-blue{
 	@apply border-primary bg-primary text-primary-black border border-opacity-20 rounded-3xl py-4 px-9 text-base font-medium text-center w-full;
+}
+
+.button--pandora--primary {
+	background: rgba(0, 0, 0, 0.04);
+	font-weight: 700;
+	padding: 0;
+	border-radius: 24px;
+	width: 100%;
+	text-align: center;
+}
+
+.button--pandora--primary span {
+	display: block;
+	background: rgba(193, 255, 0, 1);
+	padding: 16px 36px;
+	border: 1px solid rgba(193, 255, 0, 1);
+	border-radius: 24px;
+	transform: translate3d(-4px, -4px, 0);
+	transition: transform 0.3s cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+.button--pandora--primary:hover span {
+	transform: translate3d(-8px, -8px, 0);
+}
+
+.button--pandora {
+	background: rgba(0, 0, 0, 0.04);
+	font-weight: 700;
+	padding: 0;
+	border-radius: 12px;
+}
+
+.button--pandora img {
+	display: block;
+	background: white;
+	padding: 8px;
+	border: 1px solid rgba(0, 0, 0, .2);
+	border-radius: 12px;
+	transform: translate3d(-4px, -4px, 0);
+	transition: transform 0.3s cubic-bezier(0.7, 0, 0.2, 1);
+	max-width: 48px;
+	object-fit: contain;
+}
+
+.button--pandora:hover img {
+	transform: translate3d(-8px, -8px, 0);
 }
 
 input:focus,

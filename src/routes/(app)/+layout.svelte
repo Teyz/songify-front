@@ -4,7 +4,7 @@
 </script>
 
 <div>
-	<main class="relative p-5">
+	<main class="relative">
 		<slot />
 	</main>
 </div>
