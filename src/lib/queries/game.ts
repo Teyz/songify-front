@@ -1,6 +1,6 @@
 export const gameQueries = {
     getCurrentGame: async () => {
-        return await fetch('https://api.songify.xyz/private/v1/games/', {
+        return await fetch(`${import.meta.env.VITE_BASE_URL}/private/v1/games/`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

@@ -1,6 +1,6 @@
 export const userQueries = {
     createUser: async () => {
-        return await fetch('http:/localhost:3003/private/v1/users/', {
+        return await fetch(`${import.meta.env.VITE_BASE_URL}/private/v1/users/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -12,7 +12,7 @@ export const userQueries = {
         });
     },
     getUserByID: async (id: string) => {
-        return await fetch(`http:/localhost:3003/private/v1/users/${id}`, {
+        return await fetch(`${import.meta.env.VITE_BASE_URL}/private/v1/users/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

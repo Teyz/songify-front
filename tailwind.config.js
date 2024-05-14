@@ -10,6 +10,7 @@ export default {
           red: '#FA003F',
         },
         secondary: {
+          blue: '#C4D0FB',
           dark: '#1C1C1C',
           middark: '#222222',
           DEFAULT: '#272828',

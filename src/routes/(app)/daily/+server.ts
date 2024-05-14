@@ -3,17 +3,11 @@ import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 
 export const POST: RequestHandler = async ({ request, fetch }) => {
-    console.log(request.url);
-    
-    if (request.url === "/create")  {
-        console.log("coucou");
-    }   
-
     const data = await request.json();
     try {        
-        const isCorrect = await guessQueries.checkGuess(data.guess);
+        const res = await guessQueries.checkGuess(data.guess);
         
-        return json({ isCorrect }); // Inclure isCorrect dans la réponse JSON
+        return json({ data: res });
     } catch (error) {
         return new Response('Error', { status: 400 });
     }
