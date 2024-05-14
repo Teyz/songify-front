@@ -109,10 +109,10 @@
 	<div class="game-container">
 		<div class="game-header">
 			<a href="/" class="button--pandora">
-				<img src="image/back.svg" alt="">
+				<img src="/image/back.svg" alt="">
 			</a>
 			<div class="game-user">
-				<img src="image/close.svg" alt="">
+				<img src="/image/close.svg" alt="">
 				<p>{previousGuesses.length}</p>
 			</div>
 		</div>
@@ -138,7 +138,7 @@
 							{#if LottiePlayer && isTitleCorrect}
 								<div class="status">
 									<LottiePlayer
-										src='image/checked.json'
+										src='/image/checked.json'
 										autoplay={true}
 										loop={false}
 										controls={false}
@@ -189,7 +189,7 @@
 							{#if LottiePlayer && isArtistCorrect}
 								<div class="status">
 									<LottiePlayer
-										src='image/checked.json'
+										src='/image/checked.json'
 										autoplay={true}
 										loop={false}
 										controls={false}

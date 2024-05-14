@@ -33,7 +33,7 @@
 		</div>
 		<div class="flex justify-end">
 			<a class="button--pandora" href="https://ko-fi.com/songify">
-				<img src="image/charity.png" alt="">
+				<img src="/image/charity.png" alt="">
 			</a>
 		</div>
 	</div>
