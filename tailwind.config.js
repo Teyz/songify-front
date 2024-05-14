@@ -7,16 +7,14 @@ export default {
         primary: {
           DEFAULT: '#C1FF00',
           black: '#0C092A',
-          red: '#ED4245',
+          red: '#FA003F',
         },
         secondary: {
           dark: '#1C1C1C',
           middark: '#222222',
           DEFAULT: '#272828',
-          light: '#393939',
-          midlight: '#BABABA',
-          lighter: '#8D8D8D',
-          lightest: '#DEDEE3',
+          light: '#EFEEFC',
+          lighter: '#858494',
           grey: '#858494'
         }
       },

@@ -44,7 +44,7 @@
 <style lang="postcss">
 	.home-root {
 		@apply flex flex-col justify-between items-center md:justify-between gap-24;
-		height: 100vh;
+		height: 100dvh;
 	}
 
 	.logo {
