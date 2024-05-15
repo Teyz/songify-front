@@ -1,3 +1,8 @@
+<script>
+
+	import { goto } from "$app/navigation";
+
+</script>
 <svelte:head>
 	<meta name="description" content="Songify, Test your musical skills everyday !">
 	<meta name="keywords" content="quizz, quiz, music, musical">
@@ -14,9 +19,6 @@
 				<p class="subtitle">Games</p>
 				<h1>Music of the day</h1>
 			</div>
-			<!-- <div class="home-game-infos">
-	
-			</div> -->
 			<div class="flex flex-col gap-16">
 				<div class="home-description">
 					<p class="subtitle">Description</p>
@@ -24,11 +26,12 @@
 						Test your musical skills everyday ! Will you find the music and the artist with just a lyric to help you ?
 					</p>
 				</div>
-				<div class="home-play-buttons">
-					<a href="/daily" class="button--pandora--primary">
-						<span>Single Player</span>
-					</a>
-				</div>
+				<button 
+					on:click={() => goto('/daily')}
+					class="transform before:ease relative h-12 w-full overflow-hidden border border-primary bg-primary text-white shadow-2xl transition-all before:absolute before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-full before:rotate-6 before:bg-white before:opacity-10 before:duration-700 hover:shadow-primary hover:before:translate-x-full hover:before:right-[110%] rounded-full m-auto"
+				>
+					<span class="relative z-10">Single Player</span>
+				</button>
 			</div>
 		</div>
 		<div class="flex justify-end">
@@ -37,13 +40,12 @@
 			</a>
 		</div>
 	</div>
-	<span>Created by <a href="https://twitter.com/bastienrgd">Teyz</a> && DFLMNQ_</span>
 </div>
 
 
 <style lang="postcss">
 	.home-root {
-		@apply flex flex-col justify-between items-center md:justify-between gap-24;
+		@apply flex flex-col justify-center items-center gap-6;
 		height: 100dvh;
 	}
 
@@ -57,14 +59,6 @@
 
 	.home-header {
 		@apply flex flex-col gap-2;
-	}
-
-	/* .home-game-infos {
-		@apply flex gap-2;
-	} */
-
-	.home-play-buttons {
-		@apply flex gap-4;
 	}
 
 	.subtitle {
@@ -85,9 +79,5 @@
 
 	.text {
 		@apply text-primary-black font-normal text-base max-w-lg;
-	}
-
-	span {
-		@apply text-primary-black text-sm ml-auto pr-8 pb-8 font-medium;
 	}
 </style>

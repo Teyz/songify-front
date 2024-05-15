@@ -11,6 +11,8 @@
 	let isArtistCorrect = false;
 
 	let LottiePlayer: any;
+
+	$: remainingTrial = 5 - previousGuesses.length;
 	
 	onMount(async () => {
 		if ($user.id === "") {
@@ -105,35 +107,47 @@
 </svelte:head>
 
 <div class="game-root">
-	<img class="logo" src="/image/logo.svg" alt="Songify, Test your musical skills everyday !">
-	<div class="game-container">
-		<div class="game-header">
-			<a href="/" class="button--pandora">
-				<img src="/image/back.svg" alt="">
-			</a>
-			<div class="game-user">
-				<img src="/image/close.svg" alt="">
-				<p>{previousGuesses.length}</p>
-			</div>
+	<div class="flex flex-col gap-4 justify-center items-center">
+		<img src="/image/placeholder_album.svg" alt="Placeholder for music album">
+		<div class="rounded-full bg-white bg-opacity-20 text-white px-4 py-2 text-sm">
+			Il vous reste {remainingTrial} essai(s)
 		</div>
-		<div class="game-inner">
-			<form on:submit|preventDefault={onSubmit}>
-				<div class="flex flex-col gap-4">
-					<p class="subtitle">Lyric</p>
-					<h1>
-						{data.game.data.lyric}
-					</h1>
-					<div class="flex flex-col gap-2">
-						<h2 class="subtitle">What's the name of the music ?</h2>
-						<ul class="previous-guess-list">
-							{#each previousGuesses as guess}
-								<p
-									class={guess.is_title_correct ? 'text-secondary-blue' : 'text-primary-red'}
-								>
-									{guess.title}
-								</p>
-							{/each}
-						</ul>
+	</div>
+	<div class="game-header">
+		<a href="/" class="rounded-full bg-white bg-opacity-20 p-2 flex justify-center items-center w-8 h-8">
+			<img src="/image/back.svg" alt="">
+		</a>
+		<img class="logo" src="/image/logo.svg" alt="Songify, Test your musical skills everyday !">
+		<div class="rounded-full bg-white flex justify-center items-center w-8 h-8">
+			<img src="/image/hint.svg" alt="">
+		</div>
+	</div>
+	<div class="lyrics-container">
+		<h1>
+			"{data.game.data.lyric}"
+		</h1>
+	</div>
+	<div class="game-container">
+		<form on:submit|preventDefault={onSubmit}>
+			<div class="flex flex-col gap-4">
+				<div class="flex flex-col gap-2">
+					<label for="title">
+						What's the name of the music ?
+						<span>(Required)</span>
+					</label>
+					<!-- <ul class="previous-guess-list">
+						{#each previousGuesses as guess}
+							<p
+								class={guess.is_title_correct ? 'text-secondary-blue' : 'text-primary-red'}
+							>
+								{guess.title}
+							</p>
+						{/each}
+					</ul> -->
+					<div class="flex items-center gap-3">
+						<div class="rounded bg-black flex justify-center items-center p-3">
+							<img src="/image/vinyl.svg" alt="">
+						</div>
 						<div class="relative w-full">
 							{#if LottiePlayer && isTitleCorrect}
 								<div class="status">
@@ -174,17 +188,16 @@
 							}>
 						</div>
 					</div>
-					<div class="flex flex-col gap-2">
-						<h2 class="subtitle">Who write this music ?</h2>
-						<ul class="previous-guess-list">
-							{#each previousGuesses as guess}
-								<p
-									class={guess.is_artist_correct ? 'text-secondary-blue' : 'text-primary-red'}
-								>
-									{guess.artist}
-								</p>
-							{/each}
-						</ul>
+				</div>
+				<div class="flex flex-col gap-2">
+					<label for="title">
+						Who's the artist ?
+						<span>(Required)</span>
+					</label>
+					<div class="flex items-center gap-3">
+						<div class="rounded bg-black w-9 h-9 flex justify-center items-center p-3">
+							<img src="/image/song.svg" alt="">
+						</div>
 						<div class="relative w-full">
 							{#if LottiePlayer && isArtistCorrect}
 								<div class="status">
@@ -224,58 +237,56 @@
 						</div>
 					</div>
 				</div>
-				<button
-					class="button--pandora--primary"
-					disabled={isDisabled}
-				>
-					<span>Submit</span>
-				</button>
-			</form>
-		</div>
+			</div>
+			<div class="h-[1px] w-full bg-secondary-light"></div>
+			<button
+				class="bg-black rounded-full text-white py-3 uppercase text-xs font-bold"
+				disabled={isDisabled}
+			>
+				Send
+			</button>
+		</form>
 	</div>
-	<span>Created by <a href="https://twitter.com/bastienrgd">Teyz</a> && DFLMNQ_</span>
 </div>
 
 <style lang="postcss">
 	.game-root {
-		@apply flex flex-col gap-4 justify-between items-center;
-		height: 100vh;
-	}
-	.logo {
-		@apply max-w-80 object-contain mt-24;
+		@apply flex flex-col gap-4 justify-center items-center;
+		height: 100dvh;
 	}
 	.game-container {
-		@apply flex flex-col gap-4  max-w-3xl m-auto w-full;
+		@apply flex flex-col gap-4 bg-white rounded-lg p-4 max-w-2xl w-full;
 	
 	}
-
+	.lyrics-container {
+		@apply bg-primary p-6 rounded-lg max-w-2xl w-full;
+	}
 	form {
-		@apply flex flex-col gap-10;
+		@apply flex flex-col gap-4;
 	}
 
 	.status {
 		@apply absolute top-1/2 right-20 transform -translate-y-1/2 w-6 object-contain;
 	
 	}
-
-	.game-header {
-		@apply flex justify-between items-center max-w-3xl m-auto w-full;
-	}
-	.game-user {
-		@apply flex gap-1 items-center rounded-xl bg-white text-primary-black py-2 px-3 font-medium;
-	}
-	.game-user img {
-		@apply w-6 object-contain;
+	label {
+		@apply text-black font-normal text-xs;
 	
 	}
-	.game-inner {
-		@apply flex flex-col gap-10 bg-white rounded-[32px] p-8 max-w-3xl m-auto w-full;
+	label span {
+		@apply text-secondary-lighter text-xs font-normal;
 	}
-	h2, h1 {
-		@apply text-primary-black font-medium text-lg;
+	.game-header {
+		@apply flex justify-between items-center max-w-2xl w-full;
+	}
+	h1 {
+		@apply text-white font-bold text-2xl;
 	}
 	input {
-		@apply border border-secondary-light rounded-2xl py-4 px-6 text-secondary-lighter font-medium text-base;
+		@apply border border-black rounded-md py-2 px-3 text-black font-medium text-sm w-full;
+	}
+	input::placeholder {
+		@apply text-black font-medium text-sm text-opacity-30;
 	}
 	.previous-guess-list {
 		@apply flex gap-2;
@@ -292,5 +303,13 @@
 
 	input:disabled:hover {
 		cursor: not-allowed;
+	}
+
+	button {
+		transition: all 0.25s ease;
+	}
+
+	button:hover {
+		@apply bg-primary text-white;
 	}
 </style>
