@@ -2,15 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-	--navbar-collapsed-width: 56px;
-	--navbar-expanded-width: 250px;
-	--sidebar-collapsed-width: 56px;
-	--sidebar-expanded-width: 250px;
-	--primary-linear: linear-gradient(90deg, #5a77fe 0%, #bdb0fa 100%);
-	--background-linear: linear-gradient(269deg, #6A5AE0 0%, #9087E5 100%);
-}
-
 hr {
 	@apply border-t border-secondary;
 }

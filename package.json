@@ -37,6 +37,8 @@
 	"dependencies": {
 		"@fontsource-variable/rubik": "^5.0.22",
 		"@lottiefiles/svelte-lottie-player": "^0.3.1",
-		"svelte-persisted-store": "^0.9.2"
+		"@types/node": "^20.12.12",
+		"svelte-persisted-store": "^0.9.2",
+		"svelte-toasts": "^1.1.2"
 	}
 }

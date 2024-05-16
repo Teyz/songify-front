@@ -15,6 +15,7 @@ declare module '@lottiefiles/svelte-lottie-player' {
         loop?: boolean
         mode?: 'normal' | 'bounce'
         onToggleZoom?: (boolean) => void
+        play?: () => void
         renderer?: 'svg' | 'canvas'
         speed?: number
         src?: string

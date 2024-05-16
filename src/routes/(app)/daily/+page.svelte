@@ -3,6 +3,9 @@
 	import { onMount } from 'svelte';
 	import { user } from '$lib/store/user';
 	import { goto } from '$app/navigation';
+	import Hint from '$lib/components/Hint.svelte';
+	import type { IHint } from '$lib/types/hint.js';
+	import { toasts, ToastContainer, FlatToast, BootstrapToast }  from "svelte-toasts";
 
 	export let data;
 	let isDisabled = false;
@@ -10,10 +13,18 @@
 	let isTitleCorrect = false;
 	let isArtistCorrect = false;
 
+	let showHint = false;
+	let hintDisabled = false;
+	let hint: IHint = {
+		hint: '',
+		hint_type: 0,
+		has_hint: false
+	};
+
 	let LottiePlayer: any;
 
 	$: remainingTrial = 5 - previousGuesses.length;
-	
+
 	onMount(async () => {
 		if ($user.id === "") {
 			const res = await fetch('/api/user', {
@@ -26,9 +37,8 @@
 		}
 		await fetch(`/api/guesses?user_id=${$user.id}&game_id=${data.game.data.game.id}`, {
 			method: 'GET',
-		}).then(res => res.json()).then(res => {	
-			console.log(res);
-					
+		}).then(res => res.json()).then(res => {
+			console.log(res.data);
 			isTitleCorrect = res.data.is_title_correct;
 			isArtistCorrect = res.data.is_artist_correct;
 			previousGuesses = res.data.guesses;
@@ -37,6 +47,7 @@
 				goto(`/daily/${data.game.data.game.id}`)
 			}					
 		});
+
 		const module = await import('@lottiefiles/svelte-lottie-player');
 		LottiePlayer = module.LottiePlayer;
 	});
@@ -47,9 +58,9 @@
 		user_id: $user.id,
 		game_id: data.game.data.game.id,
 		title: isTitleCorrect ? previousGuesses[previousGuesses.length -1].title : '',
-		is_title_correct: false,
+		is_title_correct: isTitleCorrect ? true : false,
 		artist: isArtistCorrect ? previousGuesses[previousGuesses.length -1].artist : '',
-		is_artist_correct: false
+		is_artist_correct: isArtistCorrect ? true : false
 	};
 
 	const clearForm = () => {
@@ -57,10 +68,40 @@
 			user_id: $user.id,
 			game_id: data.game.data.game.id,
 			title: isTitleCorrect ? previousGuesses[previousGuesses.length -1].title : '',
-			is_title_correct: false,
+			is_title_correct: isTitleCorrect ? true : false,
 			artist: isArtistCorrect ? previousGuesses[previousGuesses.length -1].artist : '',
-			is_artist_correct: false
+			is_artist_correct: isArtistCorrect ? true : false
 		};
+	};
+
+	const getHint = () => {
+		fetch(`/api/hint?user_id=${$user.id}&game_id=${data.game.data.game.id}`, {
+			method: 'GET',
+		}).then(res => res.json()).then(res => {
+			console.log(res);
+
+			if (res.data.data === null && res.data.status.code === 400) {
+				hintDisabled = true;
+				toasts.add({
+					description: 'No more clues available',
+					duration: 5000,
+					placement: 'top-right',
+					type: 'info',
+					theme: 'dark',
+					onClick: () => {},
+					onRemove: () => {},
+				});
+			} else {
+				showHint = res.data.data.has_hint;
+				hint = res.data.data;
+				hintDisabled = true;
+				
+				setTimeout(() => {
+					showHint = false;
+					hintDisabled = false;
+				}, 15000);
+			}
+		});
 	};
 
 	const handleOnSubmit = async () => {
@@ -70,9 +111,7 @@
 			body: JSON.stringify({ guess })
 		});
 		const { data : guessRes } = await res.json();
-		console.log(guessRes);
 		
-
 		if (guessRes.data === null && guessRes.status.code === 400) {
 			goto(`/daily/${data.game.data.game.id}`)
 		}
@@ -106,6 +145,10 @@
 	<title>Songify - Test your musical skills everyday !</title>
 </svelte:head>
 
+<ToastContainer placement="top-right" let:data={data}>
+	<BootstrapToast {data} />
+</ToastContainer>
+
 <div class="game-root">
 	<div class="flex flex-col gap-4 justify-center items-center">
 		<img src="/image/placeholder_album.svg" alt="Placeholder for music album">
@@ -118,13 +161,36 @@
 			<img src="/image/back.svg" alt="">
 		</a>
 		<img class="logo" src="/image/logo.svg" alt="Songify, Test your musical skills everyday !">
-		<div class="rounded-full bg-white flex justify-center items-center w-8 h-8">
+		<button
+			disabled={hintDisabled}
+			on:click={getHint}
+			class="hint"
+		>
 			<img src="/image/hint.svg" alt="">
-		</div>
+		</button>
 	</div>
+	{#if showHint}
+		<Hint hint={hint.hint} hintType={hint.hint_type} />
+	{/if}
 	<div class="lyrics-container">
 		<h1>
-			"{data.game.data.lyric}"
+			{#each data.game.data.lyrics as lyric, index}
+				{#if index === 0}
+					<p class="previous">
+						{lyric}
+					</p>
+				{/if}
+				{#if index === 1}
+					<p class="current">
+						{lyric}
+					</p>
+				{/if}
+				{#if index >= 2}
+					<p class="next">
+						{lyric}
+					</p>
+				{/if}
+			{/each}
 		</h1>
 	</div>
 	<div class="game-container">
@@ -135,15 +201,15 @@
 						What's the name of the music ?
 						<span>(Required)</span>
 					</label>
-					<!-- <ul class="previous-guess-list">
+					<ul class="previous-guess-list">
 						{#each previousGuesses as guess}
 							<p
-								class={guess.is_title_correct ? 'text-secondary-blue' : 'text-primary-red'}
+								class={guess.is_title_correct ? 'text-primary' : 'text-primary-red'}
 							>
 								{guess.title}
 							</p>
 						{/each}
-					</ul> -->
+					</ul>
 					<div class="flex items-center gap-3">
 						<div class="rounded bg-black flex justify-center items-center p-3">
 							<img src="/image/vinyl.svg" alt="">
@@ -151,29 +217,30 @@
 						<div class="relative w-full">
 							{#if LottiePlayer && isTitleCorrect}
 								<div class="status">
-									<LottiePlayer
-										src='/image/checked.json'
-										autoplay={true}
-										loop={false}
-										controls={false}
-										renderer='svg'
-										background='transparent'
-										height={128}
+									<svelte:component this={LottiePlayer} 
+										src="/image/checked.json" 
+										autoplay={isTitleCorrect} 
+										loop={false} 
+										controls={false} 
+										renderer="svg" 
+										background="transparent" 
+										height={128} 
 										width={128}
 										controlsLayout={[
-												"previousFrame",
-												"playpause",
-												"stop",
-												"nextFrame",
-												"progress",
-												"frame",
-												"loop",
-												"spacer",
-												"background",
-												"snapshot",
-												"zoom",
-												"info"
-									]} />
+											"previousFrame",
+											"playpause",
+											"stop",
+											"nextFrame",
+											"progress",
+											"frame",
+											"loop",
+											"spacer",
+											"background",
+											"snapshot",
+											"zoom",
+											"info"
+										]}
+									/>
 								</div>
 							{/if}
 							<input 
@@ -194,36 +261,46 @@
 						Who's the artist ?
 						<span>(Required)</span>
 					</label>
+					<ul class="previous-guess-list">
+						{#each previousGuesses as guess}
+							<p
+								class={guess.is_artist_correct ? 'text-primary' : 'text-primary-red'}
+							>
+								{guess.artist}
+							</p>
+						{/each}
+					</ul>
 					<div class="flex items-center gap-3">
 						<div class="rounded bg-black w-9 h-9 flex justify-center items-center p-3">
 							<img src="/image/song.svg" alt="">
 						</div>
 						<div class="relative w-full">
-							{#if LottiePlayer && isArtistCorrect}
+							{#if LottiePlayer}
 								<div class="status">
-									<LottiePlayer
-										src='/image/checked.json'
-										autoplay={true}
-										loop={false}
-										controls={false}
-										renderer='svg'
-										background='transparent'
-										height={128}
+									<svelte:component this={LottiePlayer} 
+										src="/image/checked.json" 
+										autoplay={isArtistCorrect} 
+										loop={false} 
+										controls={false} 
+										renderer="svg" 
+										background="transparent" 
+										height={128} 
 										width={128}
 										controlsLayout={[
-												"previousFrame",
-												"playpause",
-												"stop",
-												"nextFrame",
-												"progress",
-												"frame",
-												"loop",
-												"spacer",
-												"background",
-												"snapshot",
-												"zoom",
-												"info"
-									]} />
+											"previousFrame",
+											"playpause",
+											"stop",
+											"nextFrame",
+											"progress",
+											"frame",
+											"loop",
+											"spacer",
+											"background",
+											"snapshot",
+											"zoom",
+											"info"
+										]}
+									/>
 								</div>
 							{/if}
 							<input 
@@ -249,10 +326,12 @@
 	</div>
 </div>
 
+<svelte:component this={LottiePlayer}/> 
+
 <style lang="postcss">
 	.game-root {
-		@apply flex flex-col gap-4 justify-center items-center;
-		height: 100dvh;
+		@apply flex flex-col gap-4 justify-center items-center py-10;
+		height: 100%;
 	}
 	.game-container {
 		@apply flex flex-col gap-4 bg-white rounded-lg p-4 max-w-2xl w-full;
@@ -266,7 +345,7 @@
 	}
 
 	.status {
-		@apply absolute top-1/2 right-20 transform -translate-y-1/2 w-6 object-contain;
+		@apply absolute top-1/2 right-16 transform -translate-y-1/2 w-6 object-contain;
 	
 	}
 	label {
@@ -294,9 +373,6 @@
 	.previous-guess-list p {
 		@apply text-xs font-medium;
 	}
-	.subtitle {
-		@apply font-medium text-sm text-secondary-lighter;
-	}
 	span {
 		@apply text-primary-black text-sm ml-auto pr-8 pb-8 font-medium;
 	}
@@ -311,5 +387,25 @@
 
 	button:hover {
 		@apply bg-primary text-white;
+	}
+
+	.previous {
+		@apply text-white text-opacity-50;
+	}
+
+	.current {
+		@apply text-white
+	}
+
+	.next {
+		@apply text-black;
+	}
+
+	.hint {
+		@apply rounded-full bg-white p-2 flex justify-center items-center w-8 h-8;
+	}
+
+	.hint:disabled {
+		cursor: not-allowed;
 	}
 </style>
