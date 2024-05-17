@@ -38,7 +38,6 @@
 		await fetch(`/api/guesses?user_id=${$user.id}&game_id=${data.game.data.game.id}`, {
 			method: 'GET',
 		}).then(res => res.json()).then(res => {
-			console.log(res.data);
 			isTitleCorrect = res.data.is_title_correct;
 			isArtistCorrect = res.data.is_artist_correct;
 			previousGuesses = res.data.guesses;
@@ -78,8 +77,6 @@
 		fetch(`/api/hint?user_id=${$user.id}&game_id=${data.game.data.game.id}`, {
 			method: 'GET',
 		}).then(res => res.json()).then(res => {
-			console.log(res);
-
 			if (res.data.data === null && res.data.status.code === 400) {
 				hintDisabled = true;
 				toasts.add({
@@ -111,20 +108,17 @@
 			body: JSON.stringify({ guess })
 		});
 		const { data : guessRes } = await res.json();
-		
-		if (guessRes.data === null && guessRes.status.code === 400) {
+			
+		if (guessRes.data === null && guessRes.status.code === 400 || guessRes.data.guesses.length === 5) {
 			goto(`/daily/${data.game.data.game.id}`)
 		}
-
-		if (guessRes.data.guesses.length === 5 ) {
-			isDisabled = true;
-		}
-			
+		
 		previousGuesses = guessRes.data.guesses;
 		isTitleCorrect = guessRes.data.is_title_correct;
 		isArtistCorrect = guessRes.data.is_artist_correct;
 
-		if (isTitleCorrect && isArtistCorrect) {
+		if (isTitleCorrect && isArtistCorrect || remainingTrial === 0) {
+			isDisabled = true;
 			setTimeout(() => {
 				goto(`/daily/${data.game.data.game.id}`)
 			}, 2000);
@@ -275,7 +269,7 @@
 							<img src="/image/song.svg" alt="">
 						</div>
 						<div class="relative w-full">
-							{#if LottiePlayer}
+							{#if LottiePlayer && isArtistCorrect}
 								<div class="status">
 									<svelte:component this={LottiePlayer} 
 										src="/image/checked.json" 
