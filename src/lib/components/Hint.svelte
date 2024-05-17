@@ -18,7 +18,7 @@
 
 <style lang="postcss">
     .hint-container {
-       @apply flex items-center justify-between p-6 bg-white rounded-lg w-full max-w-2xl;
+       @apply flex items-center justify-between p-6 bg-white rounded-lg;
     }
 
     .hint-icon {

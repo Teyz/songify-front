@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { IGuess } from '$lib/types/guess.js';
+	import { fade } from 'svelte/transition';
 	import { onMount } from 'svelte';
 	import { user } from '$lib/store/user';
 	import { goto } from '$app/navigation';
@@ -164,7 +165,9 @@
 		</button>
 	</div>
 	{#if showHint}
-		<Hint hint={hint.hint} hintType={hint.hint_type} />
+		<div transition:fade={{ delay: 0, duration: 250 }} class="w-full max-w-2xl m-auto">
+			<Hint hint={hint.hint} hintType={hint.hint_type} />
+		</div>
 	{/if}
 	<div class="lyrics-container">
 		<h1>
