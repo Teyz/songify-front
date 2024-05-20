@@ -29,8 +29,12 @@
 
 	$: remainingTrial = 5 - previousGuesses.length;
 
+	async function fetchData() {
+        return new Promise(resolve => setTimeout(() => resolve("Data loaded"), 2000));
+    }
+
 	onMount(async () => {
-		loading = writable(true);
+		await fetchData();
 		if ($user.id === "") {
 			const res = await fetch('/api/user', {
 				method: 'POST',
@@ -49,10 +53,9 @@
 			if (res.data.guesses.length === 5 || isTitleCorrect && isArtistCorrect) {
 				isDisabled = true;
 				goto(`/daily/${data.game.data.game.id}`)
+				loading = writable(false);
 			}					
 		});
-
-		loading = writable(false);
 
 		const module = await import('@lottiefiles/svelte-lottie-player');
 		LottiePlayer = module.LottiePlayer;

@@ -1,5 +1,15 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
+	import Loader from "$lib/components/Loader.svelte";
+	import { writable } from "svelte/store";
+
+	let loading = writable(false);
+
+	async function navigate() {
+        loading = writable(true);
+        await goto('/daily');
+        loading = writable(false);
+    }
 </script>
 
 <svelte:head>
@@ -10,6 +20,9 @@
 	<title>Songify - Test your musical skills everyday !</title>
 </svelte:head>
 
+{#if $loading}
+	<Loader />
+{/if}
 <div class="home-root">
 	<img class="logo" src="/image/logo.svg" alt="Songify, Test your musical skills everyday !">
 	<div class="flex flex-col gap-6 p-8 md:p-0">
@@ -26,7 +39,7 @@
 					</p>
 				</div>
 				<button 
-					on:click={() => goto('/daily')}
+					on:click={navigate}
 					class="transform before:ease relative h-12 w-full overflow-hidden border border-primary bg-primary text-white shadow-2xl transition-all before:absolute before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-full before:rotate-6 before:bg-white before:opacity-10 before:duration-700 hover:shadow-primary hover:before:translate-x-full hover:before:right-[110%] rounded-full m-auto"
 				>
 					<span class="relative z-10">Single Player</span>
