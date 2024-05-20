@@ -402,6 +402,10 @@
 		@apply rounded-full bg-white p-2 flex justify-center items-center w-8 h-8;
 	}
 
+	.hint:hover {
+		@apply bg-white bg-opacity-20;
+	}
+
 	.hint:disabled {
 		cursor: not-allowed;
 	}
