@@ -1,10 +1,7 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
-	import Loader from "$lib/components/Loader.svelte";
 	import { isLoading } from '$lib/store/loader.js';
 	
-	isLoading.set(false);
-
 	const navigate = async () => {
 		isLoading.set(true);
 		await goto('/daily');
@@ -19,9 +16,6 @@
 	<title>Songify - Test your musical skills everyday !</title>
 </svelte:head>
 
-{#if $isLoading}
-	<Loader />
-{/if}
 <div class="home-root">
 	<img class="logo" src="/image/logo.svg" alt="Songify, Test your musical skills everyday !">
 	<div class="flex flex-col gap-6 p-8 md:p-0">
