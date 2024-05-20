@@ -126,8 +126,8 @@
 
 		if (isTitleCorrect && isArtistCorrect || remainingTrial === 0) {
 			isDisabled = true;
+			isLoading.set(true);
 			setTimeout(() => {
-				isLoading.set(true);
 				goto(`/daily/${data.game.data.game.id}`)
 			}, 2000);
 		}
