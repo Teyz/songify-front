@@ -25,7 +25,7 @@
 	};
 
 	let LottiePlayer: any;
-	let loading = writable(false);
+	let loading = writable(true);
 
 	$: remainingTrial = 5 - previousGuesses.length;
 
