@@ -7,6 +7,8 @@
 	import Hint from '$lib/components/Hint.svelte';
 	import type { IHint } from '$lib/types/hint.js';
 	import { toasts, ToastContainer, FlatToast, BootstrapToast }  from "svelte-toasts";
+	import { writable  }from 'svelte/store';
+	import Loader from '$lib/components/Loader.svelte';
 
 	export let data;
 	let isDisabled = false;
@@ -23,10 +25,12 @@
 	};
 
 	let LottiePlayer: any;
+	let loading = writable(false);
 
 	$: remainingTrial = 5 - previousGuesses.length;
 
 	onMount(async () => {
+		loading = writable(true);
 		if ($user.id === "") {
 			const res = await fetch('/api/user', {
 				method: 'POST',
@@ -47,6 +51,8 @@
 				goto(`/daily/${data.game.data.game.id}`)
 			}					
 		});
+
+		loading = writable(false);
 
 		const module = await import('@lottiefiles/svelte-lottie-player');
 		LottiePlayer = module.LottiePlayer;
@@ -139,6 +145,10 @@
 	<link rel="canonical" href="https://www.rm-architecte-paris.com/" /> 
 	<title>Songify - Test your musical skills everyday !</title>
 </svelte:head>
+
+{#if $loading}
+	<Loader />
+{/if}
 
 <ToastContainer placement="top-right" let:data={data}>
 	<BootstrapToast {data} />

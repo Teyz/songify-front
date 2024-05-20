@@ -1,8 +1,7 @@
-<script>
-
+<script lang="ts">
 	import { goto } from "$app/navigation";
-
 </script>
+
 <svelte:head>
 	<meta name="description" content="Songify, Test your musical skills everyday !">
 	<meta name="keywords" content="quizz, quiz, music, musical">
