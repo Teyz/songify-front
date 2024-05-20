@@ -35,6 +35,7 @@
 			const data =  await res.json();
 			if (data.user.data.user.id) {
 				user.set({id: data.user.data.user.id});
+				guess.user_id = data.user.data.user.id;
 			}			
 		}
 		await fetch(`/api/guesses?user_id=${$user.id}&game_id=${data.game.data.game.id}`, {
