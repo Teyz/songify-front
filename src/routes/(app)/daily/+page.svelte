@@ -46,6 +46,7 @@
 			previousGuesses = res.data.guesses;
 			if (res.data.guesses.length === 5 || isTitleCorrect && isArtistCorrect) {
 				isDisabled = true;
+				isLoading.set(true);
 				goto(`/daily/${data.game.data.game.id}`)
 			}					
 		});
@@ -115,6 +116,7 @@
 		const { data : guessRes } = await res.json();
 			
 		if (guessRes.data === null && guessRes.status.code === 400 || guessRes.data.guesses.length === 5) {
+			isLoading.set(true);
 			goto(`/daily/${data.game.data.game.id}`)
 		}
 		
@@ -125,6 +127,7 @@
 		if (isTitleCorrect && isArtistCorrect || remainingTrial === 0) {
 			isDisabled = true;
 			setTimeout(() => {
+				isLoading.set(true);
 				goto(`/daily/${data.game.data.game.id}`)
 			}, 2000);
 		}
