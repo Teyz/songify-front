@@ -4,6 +4,7 @@
 	import { goto } from '$app/navigation';
 	import type { ISummary } from '$lib/types/summary.js';
     import type { IGuess } from '$lib/types/guess.js';
+	import { isLoading } from '$lib/store/loader.js';
     
     export let data;
 
@@ -46,6 +47,8 @@
                     guesses = [...guesses, guess];
                 });                       
             });
+
+            isLoading.set(false);
         }
 	});
 
