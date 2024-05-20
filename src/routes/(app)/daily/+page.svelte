@@ -6,9 +6,9 @@
 	import { goto } from '$app/navigation';
 	import Hint from '$lib/components/Hint.svelte';
 	import type { IHint } from '$lib/types/hint.js';
-	import { toasts, ToastContainer, FlatToast, BootstrapToast }  from "svelte-toasts";
-	import { writable  }from 'svelte/store';
+	import { toasts, ToastContainer, BootstrapToast }  from "svelte-toasts";
 	import Loader from '$lib/components/Loader.svelte';
+	import { isLoading } from '$lib/store/loader.js';
 
 	export let data;
 	let isDisabled = false;
@@ -25,7 +25,6 @@
 	};
 
 	let LottiePlayer: any;
-	let loading = writable(true);
 
 	$: remainingTrial = 5 - previousGuesses.length;
 
@@ -53,7 +52,7 @@
 			if (res.data.guesses.length === 5 || isTitleCorrect && isArtistCorrect) {
 				isDisabled = true;
 				goto(`/daily/${data.game.data.game.id}`)
-				loading = writable(false);
+				isLoading.set(false);
 			}					
 		});
 
@@ -148,10 +147,6 @@
 	<link rel="canonical" href="https://www.rm-architecte-paris.com/" /> 
 	<title>Songify - Test your musical skills everyday !</title>
 </svelte:head>
-
-{#if $loading}
-	<Loader />
-{/if}
 
 <ToastContainer placement="top-right" let:data={data}>
 	<BootstrapToast {data} />

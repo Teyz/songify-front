@@ -1,15 +1,12 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
 	import Loader from "$lib/components/Loader.svelte";
-	import { writable } from "svelte/store";
+	import { isLoading } from '$lib/store/loader.js';
 
-	let loading = writable(false);
-
-	async function navigate() {
-        loading = writable(true);
-        await goto('/daily');
-        loading = writable(false);
-    }
+	const navigate = async () => {
+		isLoading.set(true);
+		await goto('/daily');
+	};
 </script>
 
 <svelte:head>
@@ -20,7 +17,7 @@
 	<title>Songify - Test your musical skills everyday !</title>
 </svelte:head>
 
-{#if $loading}
+{#if $isLoading}
 	<Loader />
 {/if}
 <div class="home-root">

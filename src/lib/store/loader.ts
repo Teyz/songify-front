@@ -1,5 +1,3 @@
-import { writable } from 'svelte/store';
+import { persisted } from 'svelte-persisted-store'
 
-const loadingStore = writable(false);
-
-export default loadingStore;
+export const isLoading = persisted('isLoading', false)
