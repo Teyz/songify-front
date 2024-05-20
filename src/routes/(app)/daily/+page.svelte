@@ -33,6 +33,7 @@
     }
 
 	onMount(async () => {
+		isLoading.set(true);
 		await fetchData();
 		if ($user.id === "") {
 			const res = await fetch('/api/user', {
@@ -58,6 +59,8 @@
 
 		const module = await import('@lottiefiles/svelte-lottie-player');
 		LottiePlayer = module.LottiePlayer;
+
+		isLoading.set(false);
 	});
 
 	let previousGuesses: IGuess[] = [];
