@@ -2,6 +2,8 @@
 	import { goto } from "$app/navigation";
 	import Loader from "$lib/components/Loader.svelte";
 	import { isLoading } from '$lib/store/loader.js';
+	
+	isLoading.set(false);
 
 	const navigate = async () => {
 		isLoading.set(true);
