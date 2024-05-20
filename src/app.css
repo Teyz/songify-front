@@ -10,13 +10,14 @@ html {
 	background: linear-gradient(180deg, rgba(101, 98, 222, 0.40) 0%, rgba(101, 98, 222, 0.20) 43.07%, rgba(101, 98, 222, 0.00) 100%), url(/image/grained.svg),  #0B0A0A;
 	color: #0C092A;
 	font-family: 'Rubik Variable', sans-serif;
+	height: 100%;
 }
 
 body {
 	position: relative;
 	margin: 0;
 	width: 100vw;
-	height: 100vh;
+	height: 100%;
 }
 
 .grained {
