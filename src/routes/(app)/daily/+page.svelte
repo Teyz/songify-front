@@ -16,6 +16,7 @@
 	let isArtistCorrect = false;
 
 	let showHint = false;
+	let artistImageURL = "/image/placeholder_album.svg";
 	let hintDisabled = false;
 	let hint: IHint = {
 		hint: '',
@@ -83,6 +84,18 @@
 		fetch(`/api/hint?user_id=${$user.id}&game_id=${data.game.data.game.id}`, {
 			method: 'GET',
 		}).then(res => res.json()).then(res => {
+			console.log(res);
+
+			if (res.data.data.hint_type === 3) {
+				hintDisabled = true;
+				artistImageURL = res.data.data.hint;
+				setTimeout(() => {
+					artistImageURL = "/image/placeholder_album.svg";
+					hintDisabled = false;
+				}, 15000);
+				return;
+			}
+			
 			if (res.data.data === null && res.data.status.code === 400) {
 				hintDisabled = true;
 				toasts.add({
@@ -172,7 +185,9 @@
 	{/if}
 	<div class="flex gap-6 max-w-3xl w-full">
 		<div class="flex flex-col gap-6 justify-between items-center">
-			<img src="/image/placeholder_album.svg" alt="Placeholder for music album" class="max-w-36 object-contain">
+			{#if artistImageURL}
+				<img src={artistImageURL} alt="Placeholder for music album" class="artist-cover" in:fade={{ delay: 0, duration: 250 }}>
+			{/if}
 			<div class="rounded-full bg-white bg-opacity-20 text-white px-4 py-2 text-sm w-full flex justify-center">
 				{remainingTrial} essai(s)
 			</div>
@@ -417,5 +432,9 @@
 
 	.hint:disabled {
 		cursor: not-allowed;
+	}
+
+	.artist-cover {
+		@apply max-w-36 object-contain rounded-xl;
 	}
 </style>
