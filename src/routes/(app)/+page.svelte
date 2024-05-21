@@ -80,7 +80,7 @@
 			</div>
 		</div>
 		<div class="flex justify-end">
-			<a class="button--pandora" href="https://ko-fi.com/songify">
+			<a class="button--pandora" href="https://ko-fi.com/songify" aria-label="Support the project">
 				<img src="/image/charity.png" alt="">
 			</a>
 		</div>

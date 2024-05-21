@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { IGuess } from '$lib/types/guess.js';
-	import { fade } from 'svelte/transition';
+	import { fade, scale } from 'svelte/transition';
 	import { onMount } from 'svelte';
 	import { user } from '$lib/store/user';
 	import { goto } from '$app/navigation';
@@ -166,8 +166,10 @@
 
 <div class="game-root">
 	<div class="game-header">
-		<a href="/" class="rounded-full bg-white bg-opacity-20 p-2 flex justify-center items-center w-8 h-8">
-			<img src="/image/back.svg" alt="">
+		<a href="/" class="back-button">
+			<svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M1.06641 6.24219C0.929688 6.10547 0.875 5.94141 0.875 5.75C0.875 5.58594 0.929688 5.42188 1.06641 5.28516L5.87891 0.691406C6.15234 0.445312 6.5625 0.445312 6.80859 0.71875C7.05469 0.964844 7.05469 1.40234 6.78125 1.64844L3.14453 5.09375H12.4688C12.8242 5.09375 13.125 5.39453 13.125 5.75C13.125 6.13281 12.8242 6.40625 12.4688 6.40625H3.14453L6.78125 9.87891C7.05469 10.125 7.05469 10.5352 6.80859 10.8086C6.5625 11.082 6.15234 11.082 5.87891 10.8359L1.06641 6.24219Z" fill="white"/>
+			</svg>				
 		</a>
 		<img class="logo" src="/image/logo.svg" alt="Songify, Test your musical skills everyday !">
 		<button
@@ -175,7 +177,9 @@
 			on:click={getHint}
 			class="hint"
 		>
-			<img src="/image/hint.svg" alt="">
+			<svg width="10" height="15" viewBox="0 0 10 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M7.1875 11.25H2.8125C2.53906 10.4023 1.99219 9.63672 1.44531 8.89844C1.30859 8.70703 1.17188 8.51562 1.03516 8.32422C0.488281 7.53125 0.1875 6.60156 0.1875 5.5625C0.1875 2.91016 2.32031 0.75 5 0.75C7.65234 0.75 9.8125 2.91016 9.8125 5.58984C9.8125 6.60156 9.48438 7.53125 8.9375 8.32422C8.80078 8.51562 8.66406 8.70703 8.52734 8.89844C7.98047 9.63672 7.43359 10.4023 7.1875 11.25ZM5 14.75C3.76953 14.75 2.8125 13.793 2.8125 12.5625V12.125H7.1875V12.5625C7.1875 13.793 6.20312 14.75 5 14.75ZM2.8125 5.5625C2.8125 4.35938 3.76953 3.375 5 3.375C5.21875 3.375 5.4375 3.18359 5.4375 2.9375C5.4375 2.71875 5.21875 2.5 5 2.5C3.30469 2.5 1.9375 3.89453 1.9375 5.5625C1.9375 5.80859 2.12891 6 2.375 6C2.59375 6 2.8125 5.80859 2.8125 5.5625Z" fill="black"/>
+			</svg>
 		</button>
 	</div>
 	{#if showHint}
@@ -188,8 +192,10 @@
 			{#if artistImageURL}
 				<img src={artistImageURL} alt="Placeholder for music album" class="artist-cover" in:fade={{ delay: 0, duration: 250 }}>
 			{/if}
-			<div class="rounded-full bg-white bg-opacity-20 text-white px-4 py-2 text-sm w-full flex justify-center">
-				{remainingTrial} essai(s)
+			<div 
+				class="rounded-full bg-white bg-opacity-20 text-white px-4 py-2 text-sm w-full flex justify-center font-bold"
+			>
+				{remainingTrial} essai{#if remainingTrial > 1}(s){/if}
 			</div>
 		</div>
 		<div class="lyrics-container">
@@ -225,6 +231,7 @@
 					<ul class="previous-guess-list">
 						{#each previousGuesses as guess}
 							<p
+								in:scale={{ delay: 0, duration: 250 }}
 								class={guess.is_title_correct ? 'text-primary' : 'text-primary-red'}
 							>
 								{guess.title}
@@ -285,6 +292,7 @@
 					<ul class="previous-guess-list">
 						{#each previousGuesses as guess}
 							<p
+								in:scale={{ delay: 0, duration: 250 }}
 								class={guess.is_artist_correct ? 'text-primary' : 'text-primary-red'}
 							>
 								{guess.artist}
@@ -393,6 +401,19 @@
 		@apply flex flex-col gap-4;
 	}
 
+	.back-button {
+		@apply rounded-full bg-white bg-opacity-20 p-2 flex justify-center items-center w-8 h-8;
+		transition: all 0.25s ease;
+	} 
+
+	.back-button:hover {
+		@apply bg-white bg-opacity-100;
+	}
+
+	.back-button:hover path{
+		@apply fill-black;
+	}
+
 	.status {
 		@apply absolute top-1/2 right-16 transform -translate-y-1/2 w-6 object-contain;
 	
@@ -452,10 +473,15 @@
 
 	.hint {
 		@apply rounded-full bg-white p-2 flex justify-center items-center w-8 h-8;
+		transition: all 0.25s ease;
 	}
 
 	.hint:hover {
 		@apply bg-white bg-opacity-20;
+	}
+
+	.hint:hover path{
+		fill: white;
 	}
 
 	.hint:disabled {
