@@ -25,6 +25,8 @@
         },
     };
 
+    isLoading.set(true);
+
     let guesses: IGuess[] = [];
 
 	onMount(async () => {

@@ -1,11 +1,36 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
 	import { isLoading } from '$lib/store/loader.js';
+	import { user } from "$lib/store/user";
+	import { onMount } from "svelte";
+
+	export let data;
+	let hasUserFinishedGame = false;
 	
+	// check if user_id and get_game and check if game is finished
 	const navigate = async () => {
 		isLoading.set(true);
-		await goto('/daily');
+		if (hasUserFinishedGame) {
+			await goto(`/daily/${data.game.data.game.id}`)
+		} else {
+			await goto('/daily');
+		}
 	};
+
+	onMount(async () => {
+		if ($user.id != "") {
+			await fetch(`/api/round?user_id=${$user.id}`, {
+				method: 'GET',
+			}).then(async (res) => {
+				if (res.ok) {
+					const { data } = await res.json();
+					if (data.data.round.status === "finished") {
+						hasUserFinishedGame = true;
+					}
+				}
+			});	
+		}
+	});
 </script>
 
 <svelte:head>
