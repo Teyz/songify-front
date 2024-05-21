@@ -65,9 +65,9 @@
 </svelte:head>
 
 <div class="summary-root">
-	<div class="flex flex-col gap-4 justify-center items-center">
+	<div class="album-container" style="--image-url: url({summary.song.image_url})">
 		<img 
-            class="w-64 object-contain"
+            class="album-cover"
             src={summary.song.image_url} alt="Placeholder for music album"
         >
 	</div>
@@ -118,5 +118,26 @@
     }
     p {
         @apply text-black font-medium text-lg;
+    }
+
+    .album-cover {
+        @apply w-64 object-contain;
+    }
+
+    .album-container {
+        @apply relative flex flex-col gap-4 justify-center items-center;
+    }
+
+    .album-container:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 12px;
+        background: var(--image-url) lightgray 50% / cover no-repeat;
+        filter: blur(50px);
+        width: 100%;
+        height: 100%;
+        z-index: -1;
     }
 </style>
