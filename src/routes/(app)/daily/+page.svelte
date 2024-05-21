@@ -11,6 +11,7 @@
 
 	export let data;
 	let isDisabled = false;
+	let isCheckingLoading = false;
 
 	let isTitleCorrect = false;
 	let isArtistCorrect = false;
@@ -144,8 +145,10 @@
 	}
 
 	const onSubmit = async () => {
+		isCheckingLoading = true;
 		await handleOnSubmit();
 		clearForm();
+		isCheckingLoading = false;
 	}
 </script>
 
@@ -335,10 +338,40 @@
 			</div>
 			<div class="h-[1px] w-full bg-secondary-light"></div>
 			<button
-				class="bg-black rounded-full text-white py-3 uppercase text-xs font-bold"
+				class="bg-black rounded-full text-white py-3 uppercase text-xs font-bold flex items-center justify-center gap-2"
 				disabled={isDisabled}
+				on:click={() => isCheckingLoading = true}
+				in:fade={{ delay: 0, duration: 250 }}
 			>
-				Send
+				{#if !isCheckingLoading }
+					Send
+				{:else}
+					Checking
+					<svelte:component this={LottiePlayer} 
+						src="/image/check-loading.json" 
+						autoplay={true}
+						loop={true} 
+						controls={false} 
+						renderer="svg" 
+						background="transparent" 
+						height={16} 
+						width={16}
+						controlsLayout={[
+							"previousFrame",
+							"playpause",
+							"stop",
+							"nextFrame",
+							"progress",
+							"frame",
+							"loop",
+							"spacer",
+							"background",
+							"snapshot",
+							"zoom",
+							"info"
+						]}
+					/>
+				{/if}
 			</button>
 		</form>
 	</div>
