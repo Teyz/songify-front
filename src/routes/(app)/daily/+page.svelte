@@ -84,18 +84,6 @@
 		fetch(`/api/hint?user_id=${$user.id}&game_id=${data.game.data.game.id}`, {
 			method: 'GET',
 		}).then(res => res.json()).then(res => {
-			console.log(res);
-
-			if (res.data.data.hint_type === 3) {
-				hintDisabled = true;
-				artistImageURL = res.data.data.hint;
-				setTimeout(() => {
-					artistImageURL = "/image/placeholder_album.svg";
-					hintDisabled = false;
-				}, 15000);
-				return;
-			}
-			
 			if (res.data.data === null && res.data.status.code === 400) {
 				hintDisabled = true;
 				toasts.add({
@@ -108,6 +96,15 @@
 					onRemove: () => {},
 				});
 			} else {
+				if (res.data.data.hint_type === 3) {
+					hintDisabled = true;
+					artistImageURL = res.data.data.hint;
+					setTimeout(() => {
+						artistImageURL = "/image/placeholder_album.svg";
+						hintDisabled = false;
+					}, 15000);
+					return;
+				}
 				showHint = res.data.data.has_hint;
 				hint = res.data.data;
 				hintDisabled = true;
