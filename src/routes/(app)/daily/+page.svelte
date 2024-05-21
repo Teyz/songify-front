@@ -183,7 +183,7 @@
 			<Hint hint={hint.hint} hintType={hint.hint_type} />
 		</div>
 	{/if}
-	<div class="flex gap-6 max-w-3xl w-full">
+	<div class="flex flex-col md:flex-row gap-6 max-w-3xl w-full">
 		<div class="flex flex-col gap-6 justify-between items-center">
 			{#if artistImageURL}
 				<img src={artistImageURL} alt="Placeholder for music album" class="artist-cover" in:fade={{ delay: 0, duration: 250 }}>
