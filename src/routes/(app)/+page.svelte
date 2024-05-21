@@ -44,7 +44,7 @@
 	<meta property="og:url" content="https://www.songify.xyz/">
 	<meta property="og:type" content="website">
 	<meta property="og:title" content="Songify - Test your musical skills everyday !">
-	<meta property="og:description" content="Découvrez RM Architecte à Paris, pour vos projets de terrasses, de surélévation et de rénovation d'appartement.">
+	<meta property="og:description" content="Songify, Test your musical skills everyday !">
 	<meta property="og:image" content="/image/og.webp">
 
 	<!-- Twitter Meta Tags -->
