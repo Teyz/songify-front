@@ -152,12 +152,6 @@
 </ToastContainer>
 
 <div class="game-root">
-	<div class="flex flex-col gap-4 justify-center items-center">
-		<img src="/image/placeholder_album.svg" alt="Placeholder for music album">
-		<div class="rounded-full bg-white bg-opacity-20 text-white px-4 py-2 text-sm">
-			Il vous reste {remainingTrial} essai(s)
-		</div>
-	</div>
 	<div class="game-header">
 		<a href="/" class="rounded-full bg-white bg-opacity-20 p-2 flex justify-center items-center w-8 h-8">
 			<img src="/image/back.svg" alt="">
@@ -172,30 +166,38 @@
 		</button>
 	</div>
 	{#if showHint}
-		<div transition:fade={{ delay: 0, duration: 250 }} class="w-full max-w-2xl m-auto">
+		<div transition:fade={{ delay: 0, duration: 250 }} class="w-full max-w-3xl m-auto">
 			<Hint hint={hint.hint} hintType={hint.hint_type} />
 		</div>
 	{/if}
-	<div class="lyrics-container">
-		<h1>
-			{#each data.game.data.lyrics as lyric, index}
-				{#if index === 0}
-					<p class="previous">
-						{lyric}
-					</p>
-				{/if}
-				{#if index === 1}
-					<p class="current">
-						{lyric}
-					</p>
-				{/if}
-				{#if index >= 2}
-					<p class="next">
-						{lyric}
-					</p>
-				{/if}
-			{/each}
-		</h1>
+	<div class="flex gap-6 max-w-3xl w-full">
+		<div class="flex flex-col gap-6 justify-between items-center">
+			<img src="/image/placeholder_album.svg" alt="Placeholder for music album" class="max-w-36 object-contain">
+			<div class="rounded-full bg-white bg-opacity-20 text-white px-4 py-2 text-sm w-full flex justify-center">
+				{remainingTrial} essai(s)
+			</div>
+		</div>
+		<div class="lyrics-container">
+			<h1>
+				{#each data.game.data.lyrics as lyric, index}
+					{#if index === 0}
+						<p class="previous">
+							{lyric}
+						</p>
+					{/if}
+					{#if index === 1}
+						<p class="current">
+							{lyric}
+						</p>
+					{/if}
+					{#if index >= 2}
+						<p class="next">
+							{lyric}
+						</p>
+					{/if}
+				{/each}
+			</h1>
+		</div>
 	</div>
 	<div class="game-container">
 		<form on:submit|preventDefault={onSubmit}>
@@ -335,14 +337,14 @@
 <style lang="postcss">
 	.game-root {
 		@apply flex flex-col gap-4 justify-center items-center py-10 px-8 md:px-0;
-		height: 100%;
+		height: 100dvh;
 	}
 	.game-container {
-		@apply flex flex-col gap-4 bg-white rounded-lg p-4 max-w-2xl w-full;
+		@apply flex flex-col gap-4 bg-white rounded-lg p-4 max-w-3xl w-full;
 	
 	}
 	.lyrics-container {
-		@apply bg-primary p-6 rounded-lg max-w-2xl w-full;
+		@apply bg-primary p-6 rounded-lg max-w-3xl w-full;
 	}
 	form {
 		@apply flex flex-col gap-4;
@@ -360,10 +362,10 @@
 		@apply text-secondary-lighter text-xs font-normal;
 	}
 	.game-header {
-		@apply flex justify-between items-center max-w-2xl w-full;
+		@apply flex justify-between items-center max-w-3xl w-full;
 	}
 	h1 {
-		@apply text-white font-bold text-2xl;
+		@apply text-white font-bold text-xl;
 	}
 	input {
 		@apply border border-black rounded-md py-2 px-3 text-black font-medium text-sm w-full;
