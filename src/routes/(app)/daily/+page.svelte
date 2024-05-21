@@ -29,6 +29,8 @@
 
 	$: remainingTrial = 5 - previousGuesses.length;
 
+	$: isFirstGuess = remainingTrial === 5;
+
 	onMount(async () => {
 		if ($user.id === "") {
 			const res = await fetch('/api/user', {
@@ -272,15 +274,15 @@
 								</div>
 							{/if}
 							<input 
-								class="w-full"
 								type="text"
 								placeholder={isTitleCorrect ? previousGuesses[previousGuesses.length -1].title : "Write your answer"} 
 								name="title"
 								id="title"
 								required
 								bind:value={guess.title}
-								disabled={isTitleCorrect
-							}>
+								disabled={isTitleCorrect}
+								class={isTitleCorrect || isFirstGuess? '' : 'error'}
+							>
 						</div>
 					</div>
 				</div>
@@ -333,13 +335,14 @@
 								</div>
 							{/if}
 							<input 
-								class="w-full"
 								type="text" 
 								placeholder={isArtistCorrect ? previousGuesses[previousGuesses.length -1].artist : "Write your answer"} 
 								name="artist" id="artist" 
 								required 
 								bind:value={guess.artist} 
-								disabled={isArtistCorrect}>
+								disabled={isArtistCorrect}
+								class={isArtistCorrect || isFirstGuess ? '' : 'error'}
+							>
 						</div>
 					</div>
 				</div>
@@ -432,10 +435,23 @@
 		@apply text-white font-bold text-xl;
 	}
 	input {
-		@apply border border-black rounded-md py-2 px-3 text-black font-medium text-sm w-full;
+		@apply border rounded-md py-2 px-3 font-medium text-sm w-full;
 	}
+
+	input:not(.error) {
+		@apply border-black;
+	}
+
+	.error {
+		@apply border-primary-red;
+	}
+
+	.error::placeholder {
+		@apply text-primary-red text-opacity-30;
+	}
+
 	input::placeholder {
-		@apply text-black font-medium text-sm text-opacity-30;
+		@apply font-medium text-sm text-opacity-30;
 	}
 	.previous-guess-list {
 		@apply flex gap-2;
