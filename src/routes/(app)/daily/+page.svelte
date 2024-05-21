@@ -381,8 +381,7 @@
 
 <style lang="postcss">
 	.game-root {
-		@apply flex flex-col gap-4 justify-center items-center py-10 px-8 md:px-0 h-full;
-		height: 100dvh;
+		@apply flex flex-col gap-4 justify-center items-center py-10 px-8 md:px-0 h-full md:h-[100dvh];
 	}
 	.game-container {
 		@apply flex flex-col gap-4 bg-white rounded-lg p-4 max-w-3xl w-full;
