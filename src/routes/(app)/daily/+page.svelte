@@ -165,7 +165,7 @@
 </ToastContainer>
 
 <div class="game-root">
-	<div class="game-header">
+	<div class="game-header" in:scale={{ delay: 0, duration: 250 }}>
 		<a href="/" class="back-button">
 			<svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<path d="M1.06641 6.24219C0.929688 6.10547 0.875 5.94141 0.875 5.75C0.875 5.58594 0.929688 5.42188 1.06641 5.28516L5.87891 0.691406C6.15234 0.445312 6.5625 0.445312 6.80859 0.71875C7.05469 0.964844 7.05469 1.40234 6.78125 1.64844L3.14453 5.09375H12.4688C12.8242 5.09375 13.125 5.39453 13.125 5.75C13.125 6.13281 12.8242 6.40625 12.4688 6.40625H3.14453L6.78125 9.87891C7.05469 10.125 7.05469 10.5352 6.80859 10.8086C6.5625 11.082 6.15234 11.082 5.87891 10.8359L1.06641 6.24219Z" fill="white"/>
@@ -187,7 +187,7 @@
 			<Hint hint={hint.hint} hintType={hint.hint_type} />
 		</div>
 	{/if}
-	<div class="flex flex-col md:flex-row gap-6 max-w-3xl w-full">
+	<div class="flex flex-col md:flex-row gap-6 max-w-3xl w-full" in:scale={{ delay: 50, duration: 250 }}>
 		<div class="flex flex-col gap-6 justify-between items-center">
 			{#if artistImageURL}
 				<img src={artistImageURL} alt="Placeholder for music album" class="artist-cover" in:fade={{ delay: 0, duration: 250 }}>
@@ -220,7 +220,7 @@
 			</h1>
 		</div>
 	</div>
-	<div class="game-container">
+	<div class="game-container" in:scale={{ delay: 100, duration: 250 }}>
 		<form on:submit|preventDefault={onSubmit}>
 			<div class="flex flex-col gap-4">
 				<div class="flex flex-col gap-2">
