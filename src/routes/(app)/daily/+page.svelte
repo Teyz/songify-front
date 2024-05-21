@@ -340,7 +340,6 @@
 			<button
 				class="bg-black rounded-full text-white py-3 uppercase text-xs font-bold flex items-center justify-center gap-2"
 				disabled={isDisabled}
-				on:click={() => isCheckingLoading = true}
 				in:fade={{ delay: 0, duration: 250 }}
 			>
 				{#if !isCheckingLoading }
