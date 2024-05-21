@@ -176,7 +176,7 @@
 		</button>
 	</div>
 	{#if showHint}
-		<div transition:fade={{ delay: 0, duration: 250 }} class="w-full max-w-3xl m-auto">
+		<div transition:fade={{ delay: 0, duration: 250 }} class="w-full max-w-3xl">
 			<Hint hint={hint.hint} hintType={hint.hint_type} />
 		</div>
 	{/if}
