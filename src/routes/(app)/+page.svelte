@@ -35,10 +35,25 @@
 
 <svelte:head>
 	<meta name="description" content="Songify, Test your musical skills everyday !">
-	<meta name="keywords" content="quizz, quiz, music, musical">
+	<meta name="keywords" content="songify, quizz, quiz, music, musical">
 	<meta name="title" content="Songify - Test your musical skills everyday !">
-	<link rel="canonical" href="https://www.rm-architecte-paris.com/" /> 
+	<link rel="canonical" href="https://www.songify.xyz/" /> 
 	<title>Songify - Test your musical skills everyday !</title>
+
+	<!-- Facebook Meta Tags -->
+	<meta property="og:url" content="https://www.songify.xyz/">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Songify - Test your musical skills everyday !">
+	<meta property="og:description" content="Découvrez RM Architecte à Paris, pour vos projets de terrasses, de surélévation et de rénovation d'appartement.">
+	<meta property="og:image" content="/image/og.webp">
+
+	<!-- Twitter Meta Tags -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta property="twitter:domain" content="songify.xyz">
+	<meta property="twitter:url" content="https://www.songify.xyz/">
+	<meta name="twitter:title" content="Songify - Test your musical skills everyday !">
+	<meta name="twitter:description" content="Songify, Test your musical skills everyday !">
+	<meta name="twitter:image" content="/image/og.webp">
 </svelte:head>
 
 <div class="home-root">
