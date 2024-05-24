@@ -14,9 +14,10 @@ export default {
           dark: '#1C1C1C',
           middark: '#222222',
           DEFAULT: '#272828',
-          light: '#E5E5E5',
+          light: '#C3C3C3',
           lighter: '#808080',
-          grey: '#858494'
+          lightest: '#E5E5E5',
+          grey: '#858494',
         }
       },
       fontFamily: {

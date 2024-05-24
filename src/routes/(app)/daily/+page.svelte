@@ -8,6 +8,7 @@
 	import type { IHint } from '$lib/types/hint.js';
 	import { toasts, ToastContainer, BootstrapToast }  from "svelte-toasts";
 	import { isLoading } from '$lib/store/loader.js';
+	import Countdown from '$lib/components/Countdown.svelte';
 
 	export let data;
 	let isDisabled = false;
@@ -25,7 +26,12 @@
 		has_hint: false
 	};
 
+	let audio: HTMLAudioElement;
+
 	let LottiePlayer: any;
+
+	let audioURL: string = "";
+	let isAudioPlaying: boolean = false;
 
 	$: remainingTrial = 5 - previousGuesses.length;
 
@@ -56,7 +62,9 @@
 		});
 
 		const module = await import('@lottiefiles/svelte-lottie-player');
-		LottiePlayer = module.LottiePlayer;
+		LottiePlayer = module.LottiePlayer;		
+
+		audioURL = `/song/${data.game.data.game.song_id}.mp3`;
 
 		isLoading.set(false);
 	});
@@ -152,6 +160,16 @@
 		clearForm();
 		isCheckingLoading = false;
 	}
+
+	const playAudio = () => {
+		isAudioPlaying = !isAudioPlaying;
+		audio.volume = 0.1;
+		audio.play().then(() => {
+			setTimeout(() => {
+				isAudioPlaying = false;
+			}, 15000);
+		});
+	}
 </script>
 
 <svelte:head>
@@ -165,6 +183,8 @@
 <ToastContainer placement="top-right" let:data={data}>
 	<BootstrapToast {data} />
 </ToastContainer>
+
+<audio src={audioURL} bind:this={audio} class="hidden"></audio>
 
 <div class="game-root">
 	<div class="game-header" in:scale={{ delay: 0, duration: 250 }}>
@@ -194,10 +214,26 @@
 			{#if artistImageURL}
 				<img src={artistImageURL} alt="Placeholder for music album" class="artist-cover" in:fade={{ delay: 0, duration: 250 }}>
 			{/if}
-			<div 
-				class="rounded-full bg-white bg-opacity-20 text-white px-4 py-2 text-sm w-full flex justify-center font-bold"
-			>
-				{remainingTrial} essai{#if remainingTrial > 1}(s){/if}
+			<div class="flex gap-2 items-center justify-center">
+				<div 
+					class="rounded-full bg-white bg-opacity-20 text-white px-4 py-2 text-sm w-full flex justify-center font-bold"
+				>
+					{remainingTrial} essai{#if remainingTrial > 1}(s){/if}
+				</div>
+				<button
+					disabled={isAudioPlaying}
+					on:click={playAudio}
+					class="song"
+					in:scale={{ delay: 0, duration: 250 }}
+				>
+					{#if isAudioPlaying }
+						<Countdown />
+					{:else}
+						<svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M13.6445 0.941406C13.8633 1.10547 14 1.35156 14 1.625V3.59375V10.8125C14 12.043 12.8242 13 11.375 13C9.92578 13 8.75 12.043 8.75 10.8125C8.75 9.60938 9.92578 8.625 11.375 8.625C11.6758 8.625 11.9766 8.67969 12.25 8.76172V4.76953L5.25 6.875V12.5625C5.25 13.793 4.07422 14.75 2.625 14.75C1.17578 14.75 0 13.793 0 12.5625C0 11.3594 1.17578 10.375 2.625 10.375C2.92578 10.375 3.22656 10.4297 3.5 10.5117V6.21875V4.25C3.5 3.86719 3.74609 3.53906 4.10156 3.42969L12.8516 0.804688C13.125 0.722656 13.4258 0.777344 13.6445 0.941406Z" fill="black"/>
+						</svg>
+					{/if}				
+				</button>
 			</div>
 		</div>
 		<div class="lyrics-container">
@@ -391,7 +427,7 @@
 
 <style lang="postcss">
 	.game-root {
-		@apply flex flex-col gap-4 justify-center items-center py-10 px-8 md:px-0 h-full md:h-[100dvh];
+		@apply flex flex-col gap-6 justify-center items-center py-10 px-8 md:px-0 h-full md:h-[100dvh];
 	}
 	.game-container {
 		@apply flex flex-col gap-4 bg-white rounded-lg p-4 max-w-3xl w-full;
@@ -506,5 +542,13 @@
 
 	.artist-cover {
 		@apply max-w-36 object-contain rounded-xl;
+	}
+
+	.song {
+		@apply w-12 h-8 rounded-full flex justify-center items-center bg-white;
+	}
+
+	.song:disabled {
+		cursor: not-allowed;
 	}
 </style>

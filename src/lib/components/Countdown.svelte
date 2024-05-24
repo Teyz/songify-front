@@ -1,5 +1,6 @@
 <script lang="ts">
     import { onMount, onDestroy } from 'svelte';
+	import { scale } from 'svelte/transition';
     
     let countdown: number = 15;
     let countdownInterval: NodeJS.Timeout;
@@ -16,12 +17,6 @@
     });
   </script>
   
-  <div class="countdown-container">
+  <div in:scale={{ delay: 0, duration: 250 }}>
     {countdown}
   </div>
-
-  <style lang="postcss">
-    .countdown-container {
-      @apply rounded-[4px] bg-black bg-opacity-10 flex justify-center items-center text-black text-base font-medium w-11 h-11;
-    }    
-  </style>

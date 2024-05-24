@@ -13,7 +13,9 @@
         </div>
         <p>{HintTypeToString(hintType)} <strong>{hint}</strong></p>
     </div>
-    <Countdown />
+    <div class="countdown-container">
+        <Countdown />
+    </div>
 </div>
 
 <style lang="postcss">
@@ -24,4 +26,7 @@
     .hint-icon {
         @apply rounded-[4px] bg-black bg-opacity-10 flex justify-center items-center p-4;
     }
+    .countdown-container {
+      @apply rounded-[4px] bg-black bg-opacity-10 flex justify-center items-center text-black text-base font-medium w-11 h-11;
+    }  
 </style>
