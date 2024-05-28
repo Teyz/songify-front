@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
+	import Hero from "$lib/components/Hero.svelte";
+	import Navbar from "$lib/components/Navbar.svelte";
 	import { isLoading } from '$lib/store/loader.js';
 	import { user } from "$lib/store/user";
 	import { onMount } from "svelte";
@@ -56,6 +58,8 @@
 	<meta name="twitter:image" content="/image/og.webp">
 </svelte:head>
 
+<Navbar />
+<Hero />
 <div class="home-root">
 	<img class="logo" src="/image/logo.svg" alt="Songify, Test your musical skills everyday !">
 	<div class="flex flex-col gap-6 p-8 md:p-0">
@@ -79,18 +83,13 @@
 				</button>
 			</div>
 		</div>
-		<div class="flex justify-end">
-			<a class="button--pandora" href="https://ko-fi.com/songify" aria-label="Support the project">
-				<img src="/image/charity.png" alt="">
-			</a>
-		</div>
 	</div>
 </div>
 
 
 <style lang="postcss">
 	.home-root {
-		@apply flex flex-col justify-center items-center gap-6;
+		@apply flex flex-col justify-center items-center gap-6 bg-white;
 		height: 100dvh;
 	}
 

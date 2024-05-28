@@ -18,6 +18,7 @@ export default {
           lighter: '#808080',
           lightest: '#E5E5E5',
           grey: '#858494',
+          lightGrey: '#FDFCFE',
         }
       },
       fontFamily: {

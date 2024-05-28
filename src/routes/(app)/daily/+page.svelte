@@ -33,9 +33,9 @@
 	let audioURL: string = "";
 	let isAudioPlaying: boolean = false;
 
-	$: remainingTrial = 5 - previousGuesses.length;
+	$: remainingTrial = 3 - previousGuesses.length;
 
-	$: isFirstGuess = remainingTrial === 5;
+	$: isFirstGuess = remainingTrial === 3;
 
 	onMount(async () => {
 		if ($user.id === "") {
@@ -54,17 +54,17 @@
 			isTitleCorrect = res.data.is_title_correct;
 			isArtistCorrect = res.data.is_artist_correct;
 			previousGuesses = res.data.guesses;
-			if (res.data.guesses.length === 5 || isTitleCorrect && isArtistCorrect) {
+			if (res.data.guesses.length === 3 || isTitleCorrect && isArtistCorrect) {
 				isDisabled = true;
 				isLoading.set(true);
 				goto(`/daily/${data.game.data.game.id}`)
 			}					
 		});
-
+		
 		const module = await import('@lottiefiles/svelte-lottie-player');
 		LottiePlayer = module.LottiePlayer;		
 
-		audioURL = `/song/${data.game.data.game.song_id}.mp3`;
+		audioURL = `https://files.songify.xyz/${data.game.data.game.song_id}.mp3`;
 
 		isLoading.set(false);
 	});
@@ -136,7 +136,7 @@
 		});
 		const { data : guessRes } = await res.json();
 			
-		if (guessRes.data === null && guessRes.status.code === 400 || guessRes.data.guesses.length === 5) {
+		if (guessRes.data === null && guessRes.status.code === 400 || guessRes.data.guesses.length === 3) {
 			isLoading.set(true);
 			goto(`/daily/${data.game.data.game.id}`)
 		}
@@ -176,7 +176,7 @@
 	<meta name="description" content="Songify, Test your musical skills everyday !">
 	<meta name="keywords" content="quizz, quiz, music, musical">
 	<meta name="title" content="Songify - Test your musical skills everyday !">
-	<link rel="canonical" href="https://www.rm-architecte-paris.com/" /> 
+	<link rel="canonical" href="https://www.songify.xyz/" /> 
 	<title>Songify - Test your musical skills everyday !</title>
 </svelte:head>
 
@@ -541,7 +541,7 @@
 	}
 
 	.artist-cover {
-		@apply max-w-36 object-contain rounded-xl;
+		@apply max-w-36 max-h-36 object-cover rounded-xl w-full;
 	}
 
 	.song {

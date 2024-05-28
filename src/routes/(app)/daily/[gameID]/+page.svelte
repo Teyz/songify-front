@@ -74,13 +74,25 @@
         }
 	});
 
+    const sharedOnTwitter = () => {
+        const res = `🇫🇷 Songify - ${formattedDate}%0A%0A`;
+        const formattedGuesses = guesses.map((guess: IGuess, index: number) => {
+            return `${index + 1}. ${guess.is_artist_correct && guess.is_title_correct ? '✅' : '❌' }%0A`;
+        }).join("\n");
+        const end = `%0APlay free on https://www.songify.xyz/`;
+        
+        window.open(
+            `https://twitter.com/intent/tweet?text=${res+formattedGuesses+end}`
+        , '_blank');
+    };
+
 </script>
 
 <svelte:head>
 	<meta name="description" content="Songify, Test your musical skills everyday !">
 	<meta name="keywords" content="quizz, quiz, music, musical">
 	<meta name="title" content="Songify - Test your musical skills everyday !">
-	<link rel="canonical" href="https://www.rm-architecte-paris.com/" /> 
+	<link rel="canonical" href="https://www.songify.xyz/" /> 
 	<title>Songify - Test your musical skills everyday !</title>
 </svelte:head>
 
@@ -125,7 +137,7 @@
 			</h1>
 		</div>
 	</div>
-    <div class="sumary-container">
+    <div class="sumary-container" in:scale={{ delay: 200, duration: 250 }}>
         <h1 class="w-fit uppercase text-black text-center text-base font-medium m-auto">
             {#if summary.round.has_won}
                 Vous avez trouvé la musique du {formattedDate} <br>
@@ -141,27 +153,41 @@
                     <span class="text-secondary-light text-xs">{index + 1}.</span>
                     <div class="flex gap-3 justify-center items-center w-full">
                         {#if guess.is_artist_correct}
-                            <img src="/image/song-wrong.svg" alt="" class="w-9 object-contain">
+                            <img src="/image/song-correct.svg" alt="" class="w-9 object-contain">
                         {:else}
                             <img src="/image/song-wrong.svg" alt="" class="w-9 object-contain">
                         {/if}
                         <div class={guess.is_artist_correct ? "guess-correct" : "guess-wrong"}>
                             {guess.artist}
+                            {#if guess.is_artist_correct}
+                                <img src="/image/checked-summary.svg" alt="">
+                            {/if}
                         </div>
                     </div>
                     <div class="flex gap-3 justify-center items-center w-full">
                         {#if guess.is_title_correct}
-                            <img src="/image/song-wrong.svg" alt="" class="w-9 object-contain">
+                            <img src="/image/title-correct.svg" alt="" class="w-9 object-contain">
                         {:else}
-                            <img src="/image/song-wrong.svg" alt="" class="w-9 object-contain">
+                            <img src="/image/title-wrong.svg" alt="" class="w-9 object-contain">
                         {/if}
                         <div class={guess.is_title_correct ? "guess-correct" : "guess-wrong"}>
                             {guess.title}
+                            {#if guess.is_title_correct}
+                                <img src="/image/checked-summary.svg" alt="">
+                            {/if}
                         </div> 
                     </div>
                 </li>
             {/each}
         </ul>
+        <div class="bg-secondary-lightest w-full h-[1px]" />
+        <button
+            class="shared-button"
+            on:click={sharedOnTwitter}
+        >
+            <img src="/image/shared.svg" alt="">
+            Shared on twitter
+        </button>
     </div>
 </div>
 
@@ -223,9 +249,19 @@
         @apply bg-white rounded-full flex items-center justify-center py-2 px-4 text-black text-xs font-medium;
     }
 
+    .guess-correct {
+        @apply border border-black rounded text-xs w-full flex justify-between items-center; 
+        box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+        padding: 10px;
+    }
+
     .guess-wrong {
         @apply border border-secondary-lightest rounded text-xs w-full; 
         box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
         padding: 10px;
+    }
+
+    .shared-button {
+        @apply flex justify-center items-center gap-2 bg-black text-white text-xs font-bold w-full py-3 rounded-full;
     }
 </style>
