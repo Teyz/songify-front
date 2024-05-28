@@ -11,6 +11,9 @@ html {
 	color: #0C092A;
 	font-family: 'Rubik Variable', sans-serif;
 	min-height: 100%;
+	
+	--bg-wave-position: 150px;
+	--curve-height: 70px;
 }
 
 body {
