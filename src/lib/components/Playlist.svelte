@@ -3,7 +3,7 @@
     <p class="text-sm text-[#6f6d71]">Perfect for blindtest evenings and the like !</p>
     <div class="flex flex-col gap-1 cover-container justify-center items-center">
         <a href="https://open.spotify.com/playlist/63NfRpDXXqDkSGeHjkVyOO?si=c1a1320b6923440c" target="_blank" rel="noopener" class="cover">
-            <img src="/image/logo-solo.svg" alt="">
+            <img src="/image/logo-solo.svg" alt="" class="object-contain w-32 h-24">
         </a>
         <a href="https://open.spotify.com/playlist/63NfRpDXXqDkSGeHjkVyOO?si=c1a1320b6923440c" target="_blank" rel="noopener" class="text-sm text-[#6f6d71]">
             Official playlist

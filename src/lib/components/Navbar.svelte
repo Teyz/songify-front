@@ -27,7 +27,7 @@
 
 <div class="navbar-container pl-8 md:px-64 pr-4 z-20 py-5">
     <div class="flex items-center justify-between w-full">
-        <img src="/image/logo.svg" alt="" class="z-20">
+        <img src="/image/logo.svg" alt="" class="z-20 object-contain w-36 h-8">
         <ul class="hidden md:flex items-center justify-center gap-4">
             <li>
                 <a href="/daily">Play</a>
@@ -37,7 +37,7 @@
             </li>
             <li class="flex items-center gap-3">
                 <a href="https://ko-fi.com/songify" target="_blank" rel="noopener">Support us</a>
-                <img src="/image/link.svg" alt="" class="object-contain w-4">
+                <img src="/image/link.svg" alt="" class="object-contain w-4 h-4">
             </li>
         </ul>
     </div>
@@ -50,7 +50,7 @@
             <li><a href="#playlist" on:click={handleClick}>Playlist</a></li>
             <li class="flex items-center gap-3">
                 <a href="https://ko-fi.com/songify" target="_blank" rel="noopener" on:click={handleClick}>Support us</a>
-                <img src="/image/link.svg" alt="" class="object-contain w-4">
+                <img src="/image/link.svg" alt="" class="object-contain w-4 h-4">
             </li>
         </ul>
         <div class="flex flex-col gap-8">
@@ -58,7 +58,7 @@
             <ul class="flex items-center justify-between">
                 <li>
                     <a href="https://x.com/Songify_game" on:click={handleClick}>
-                        <img src="/image/x.svg" alt="">
+                        <img src="/image/x.svg" alt="" class="object-contain h-5 w-5">
                     </a>
                 </li>
                 <li>

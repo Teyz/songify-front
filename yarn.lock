@@ -280,6 +280,11 @@
   dependencies:
     import-meta-resolve "^4.0.0"
 
+"@sveltejs/amp@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@sveltejs/amp/-/amp-1.1.0.tgz#e9e22712fe5d76d5f45ce20387b4c402590ecab5"
+  integrity sha512-gcNhZC2DMu0im/ETx5C6mmXOCZuch66Klsid7Bl0J6yL6hiDxKuPEMOOGPg5Nj6AaAU06R7nv8rygNZnjTYb2A==
+
 "@sveltejs/kit@^1.20.4":
   version "1.30.4"
   resolved "https://registry.yarnpkg.com/@sveltejs/kit/-/kit-1.30.4.tgz#4ce7da5bd71925ee6c107d137385eb4cead40b45"
