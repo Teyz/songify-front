@@ -115,8 +115,7 @@
 	}
 
 	.title-card {
-        @apply bg-primary text-white text-3xl font-bold py-1 px-2 uppercase flex items-center justify-center;
-        border-radius: 9px 9px 9px 9px / 75% 75% 75% 75%;
+        @apply text-black text-3xl font-bold uppercase flex;
     }
 
 	button {
