@@ -10,7 +10,6 @@
 	export let data;
 	let hasUserFinishedGame = false;
 	
-	// check if user_id and get_game and check if game is finished
 	const navigate = async () => {
 		isLoading.set(true);
 		if (hasUserFinishedGame) {
@@ -27,7 +26,6 @@
 			}).then(async (res) => {
 				if (res.ok) {
 					const { data } = await res.json();
-					console.log(data);		
 					if (data.data.round.status === "finished") {
 						hasUserFinishedGame = true;
 					}

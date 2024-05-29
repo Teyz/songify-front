@@ -9,7 +9,7 @@
 	isLoading.set(true);
 
 	async function fetchData() {
-        return new Promise(resolve => setTimeout(() => resolve("Data loaded"), 2000));
+        return new Promise(resolve => resolve("Data loaded"));
     }
 
 	onMount(async () => {
