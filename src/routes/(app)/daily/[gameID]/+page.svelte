@@ -105,7 +105,7 @@
 		</a>
 		<img class="logo" src="/image/logo.svg" alt="Songify, Test your musical skills everyday !">
 	</div>
-	<div class="flex flex-col md:flex-row gap-6 max-w-3xl w-full" in:scale={{ delay: 50, duration: 250 }}>
+	<div class="flex flex-col md:flex-row gap-6 max-w-3xl w-full justify-between" in:scale={{ delay: 50, duration: 250 }}>
 		<div class="flex flex-col gap-6 justify-between items-center">
 			<div class="album-container" style="--image-url: url({summary.song.image_url})">
                 <img 
@@ -221,7 +221,7 @@
 		@apply flex flex-col gap-4 bg-white rounded-lg p-4 max-w-3xl w-full justify-center items-start;
 	}
 	.lyrics-container {
-		@apply bg-primary p-6 rounded-lg flex flex-col justify-center items-start w-full;
+		@apply bg-primary p-6 rounded-lg flex flex-col justify-center items-start w-full max-w-xl;
 	}
 	.back-button {
 		@apply rounded-full bg-white bg-opacity-20 p-2 flex justify-center items-center w-8 h-8;

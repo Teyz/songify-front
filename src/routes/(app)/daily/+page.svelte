@@ -211,7 +211,7 @@
 			<Hint hint={hint.hint} hintType={hint.hint_type} />
 		</div>
 	{/if}
-	<div class="flex flex-col md:flex-row gap-6 max-w-3xl w-full" in:scale={{ delay: 50, duration: 250 }}>
+	<div class="flex flex-col md:flex-row gap-6 max-w-3xl w-full justify-between" in:scale={{ delay: 50, duration: 250 }}>
 		<div class="flex flex-col gap-6 justify-between items-center">
 			{#if artistImageURL}
 				<div class="relative">
@@ -446,7 +446,7 @@
 	
 	}
 	.lyrics-container {
-		@apply bg-primary p-6 rounded-lg max-w-3xl w-full flex flex-col justify-center items-start;
+		@apply bg-primary p-6 rounded-lg max-w-xl w-full flex flex-col justify-center items-start;
 	}
 	form {
 		@apply flex flex-col gap-4;
