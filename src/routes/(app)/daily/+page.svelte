@@ -212,13 +212,22 @@
 	<div class="flex flex-col md:flex-row gap-6 max-w-3xl w-full" in:scale={{ delay: 50, duration: 250 }}>
 		<div class="flex flex-col gap-6 justify-between items-center">
 			{#if artistImageURL}
-				<img src={artistImageURL} alt="Placeholder for music album" class="artist-cover" in:fade={{ delay: 0, duration: 250 }}>
+				<div class="relative">
+					{#if hintDisabled }
+						<div 
+							class="rounded-full bg-white p-2 flex justify-center items-center w-8 h-8 absolute right-2 top-2"
+						>
+							<Countdown />
+						</div>
+					{/if}
+					<img src={artistImageURL} alt="Placeholder for music album" class="artist-cover" in:fade={{ delay: 0, duration: 250 }}>
+				</div>
 			{/if}
 			<div class="flex gap-2 items-center justify-center">
 				<div 
 					class="rounded-full bg-white bg-opacity-20 text-white px-4 py-2 text-sm w-full flex justify-center font-bold"
 				>
-					{remainingTrial} essai{#if remainingTrial > 1}(s){/if}
+					{remainingTrial} attempt{#if remainingTrial > 1}(s){/if}
 				</div>
 				<button
 					disabled={isAudioPlaying}
@@ -541,7 +550,7 @@
 	}
 
 	.artist-cover {
-		@apply max-w-36 max-h-36 object-cover rounded-xl w-full;
+		@apply max-w-36 max-h-36 object-cover rounded-xl w-36 h-36;
 	}
 
 	.song {

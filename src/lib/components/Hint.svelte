@@ -11,7 +11,7 @@
         <div class="hint-icon">
             <img src="/image/hint.svg" alt="hint" />
         </div>
-        <p>{HintTypeToString(hintType)} <strong>{hint}</strong></p>
+        <p>{HintTypeToString(hintType, hint)}</p>
     </div>
     <div class="countdown-container">
         <Countdown />

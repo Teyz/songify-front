@@ -113,7 +113,7 @@
                     src={summary.song.image_url} alt="Placeholder for music album"
                 >
             </div>
-            <a href="https://open.spotify.com/playlist/63NfRpDXXqDkSGeHjkVyOO?si=033d6ad645d1443a" class="show-playlist">Découvrir la playlist</a>
+            <a href="https://open.spotify.com/playlist/63NfRpDXXqDkSGeHjkVyOO?si=033d6ad645d1443a" class="show-playlist">Discover the playlist</a>
 		</div>
 		<div class="lyrics-container">
 			<h1 class="font-bold text-xl">
@@ -140,10 +140,10 @@
     <div class="sumary-container" in:scale={{ delay: 200, duration: 250 }}>
         <h1 class="w-fit uppercase text-black text-center text-base font-medium m-auto">
             {#if summary.round.has_won}
-                Vous avez trouvé la musique du {formattedDate} <br>
+                YOU FOUND THE MUSIC ON {formattedDate} <br>
                 <strong>{musicFormatted}</strong>
              {:else}
-                 Vous n’avez pas trouvé la musique du {formattedDate} <br>
+                YOU HAVEN'T FOUND THE MUSIC ON {formattedDate} <br>
                  <strong>{musicFormatted}</strong>
              {/if}
          </h1>
@@ -186,7 +186,7 @@
             on:click={sharedOnTwitter}
         >
             <img src="/image/shared.svg" alt="">
-            Shared on twitter
+            Share on twitter
         </button>
     </div>
 </div>

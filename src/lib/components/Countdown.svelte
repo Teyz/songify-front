@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount, onDestroy } from 'svelte';
-	import { scale } from 'svelte/transition';
+	  import { scale } from 'svelte/transition';
     
     let countdown: number = 15;
     let countdownInterval: NodeJS.Timeout;

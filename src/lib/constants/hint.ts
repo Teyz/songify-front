@@ -1,8 +1,8 @@
-export const HintTypeToString = (hintType: number) => {
+export const HintTypeToString = (hintType: number, hint: string) => {
     switch (hintType) {
         case 1:
-            return 'The musical style of the music is';
+            return `This track is ${hint} music`;
         case 2:
-            return 'The music was released in';
+            return `The music was released in ${hint}`;
     }
 }
