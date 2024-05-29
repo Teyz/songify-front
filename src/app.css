@@ -12,6 +12,7 @@ html {
 	font-family: 'Rubik Variable', sans-serif;
 	min-height: 100%;
 	scroll-behavior: smooth;
+	overflow-x: hidden;
 }
 
 body {
