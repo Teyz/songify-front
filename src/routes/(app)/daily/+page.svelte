@@ -557,7 +557,7 @@
 	}
 
 	.song {
-		@apply w-12 h-8 rounded-full flex justify-center items-center bg-white;
+		@apply p-2 rounded-full flex justify-center items-center bg-white;
 	}
 
 	.song:disabled {
