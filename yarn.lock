@@ -268,6 +268,11 @@
   resolved "https://registry.yarnpkg.com/@polka/url/-/url-1.0.0-next.25.tgz#f077fdc0b5d0078d30893396ff4827a13f99e817"
   integrity sha512-j7P6Rgr3mmtdkeDGTe0E/aYyWEWVtc5yFXtHCRHs28/jptDEWfaVOc5T7cblqy1XKPPfCxJc/8DwQ5YgLOZOVQ==
 
+"@svelte-plugins/tooltips@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@svelte-plugins/tooltips/-/tooltips-3.0.1.tgz#91b4783f9481887257fa0488000afa36edb87cd5"
+  integrity sha512-gFTr5iNEGYMi2spa4nPuoFQ/ZJU6XZg9zthxX4t8b780V3ucgYbjF0pBg/1w/SpL9I4v7FeQ4T+gehh8MV5xeQ==
+
 "@sveltejs/adapter-auto@^3.2.0":
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/@sveltejs/adapter-auto/-/adapter-auto-3.2.0.tgz#00720dfad99f95452c6e47cc64a1cb58324337d2"

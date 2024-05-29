@@ -11,8 +11,8 @@
 
     function formatDate(date: Date): string {
         let day = date.getDate();
-        let month = date.getMonth() + 1; // Months are zero-based in JavaScript/TypeScript
-        let year = date.getFullYear() % 100; // Get last two digits of the year
+        let month = date.getMonth() + 1;
+        let year = date.getFullYear() % 100;
 
         let dayString = day < 10 ? '0' + day : day.toString();
         let monthString = month < 10 ? '0' + month : month.toString();
@@ -113,7 +113,7 @@
                     src={summary.song.image_url} alt="Placeholder for music album"
                 >
             </div>
-            <a href="https://open.spotify.com/playlist/63NfRpDXXqDkSGeHjkVyOO?si=033d6ad645d1443a" class="show-playlist">Discover the playlist</a>
+            <a href="https://open.spotify.com/playlist/63NfRpDXXqDkSGeHjkVyOO?si=033d6ad645d1443a" class="show-playlist">Discover the playlist on Spotify</a>
 		</div>
 		<div class="lyrics-container">
 			<h1 class="font-bold text-xl">
@@ -246,7 +246,7 @@
 		@apply text-black;
 	}
     .show-playlist {
-        @apply bg-white rounded-full flex items-center justify-center py-2 px-4 text-black text-xs font-medium;
+        @apply bg-white rounded-full flex items-center justify-center py-2 px-4 text-black text-xs font-medium text-center;
     }
 
     .guess-correct {
