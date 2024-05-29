@@ -221,7 +221,7 @@
 		@apply flex flex-col gap-4 bg-white rounded-lg p-4 max-w-3xl w-full justify-center items-start;
 	}
 	.lyrics-container {
-		@apply bg-primary p-6 rounded-lg;
+		@apply bg-primary p-6 rounded-lg flex flex-col justify-center items-start w-full;
 	}
 	.back-button {
 		@apply rounded-full bg-white bg-opacity-20 p-2 flex justify-center items-center w-8 h-8;

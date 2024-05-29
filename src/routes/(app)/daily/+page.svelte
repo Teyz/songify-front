@@ -446,7 +446,7 @@
 	
 	}
 	.lyrics-container {
-		@apply bg-primary p-6 rounded-lg max-w-3xl w-full;
+		@apply bg-primary p-6 rounded-lg max-w-3xl w-full flex flex-col justify-center items-start;
 	}
 	form {
 		@apply flex flex-col gap-4;
