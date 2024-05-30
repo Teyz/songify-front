@@ -75,7 +75,7 @@
 	});
 
     const sharedOnTwitter = () => {
-        const res = `🇫🇷 Songify - ${formattedDate}%0A%0A`;
+        const res = `🇫🇷 @SongifyGame - ${formattedDate}%0A%0A`;
         const formattedGuesses = guesses.map((guess: IGuess, index: number) => {
             return `${index + 1}. ${guess.is_artist_correct && guess.is_title_correct ? '✅' : '❌' }%0A`;
         }).join("\n");
